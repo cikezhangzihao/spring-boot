@@ -16,13 +16,6 @@
 
 package org.springframework.boot.autoconfigure;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -32,6 +25,8 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.support.SpringFactoriesLoader;
+
+import java.lang.annotation.*;
 
 /**
  * Enable auto-configuration of the Spring Application Context, attempting to guess and
@@ -79,8 +74,8 @@ import org.springframework.core.io.support.SpringFactoriesLoader;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@AutoConfigurationPackage
-@Import(AutoConfigurationImportSelector.class)
+@AutoConfigurationPackage	// 进行包扫描 - 扫描Main方法同级和同级下的所有路径包
+@Import(AutoConfigurationImportSelector.class)	// 导入一些组件，具有特殊功能的类
 public @interface EnableAutoConfiguration {
 
 	String ENABLED_OVERRIDE_PROPERTY = "spring.boot.enableautoconfiguration";

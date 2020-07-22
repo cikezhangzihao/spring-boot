@@ -16,25 +16,16 @@
 
 package org.springframework.boot.autoconfigure;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.context.TypeExcludeFilter;
-import org.springframework.context.annotation.AnnotationBeanNameGenerator;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.*;
 import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.data.repository.Repository;
+
+import java.lang.annotation.*;
 
 /**
  * Indicates a {@link Configuration configuration} class that declares one or more
@@ -48,12 +39,14 @@ import org.springframework.data.repository.Repository;
  * @author Andy Wilkinson
  * @since 1.2.0
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Inherited
-@SpringBootConfiguration
-@EnableAutoConfiguration
+@Target(ElementType.TYPE) //注解的使用元素
+@Retention(RetentionPolicy.RUNTIME) // 注解的保留位置
+@Documented // 说明该注解将被包含在javadoc中
+@Inherited // 说明子类可以继承父类中的该注解
+@SpringBootConfiguration	// 和 @Configuration 一致 标注当前类为配置类
+@EnableAutoConfiguration	// 开启自动装配
+
+// 开启组件扫描
 @ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
 		@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
 public @interface SpringBootApplication {

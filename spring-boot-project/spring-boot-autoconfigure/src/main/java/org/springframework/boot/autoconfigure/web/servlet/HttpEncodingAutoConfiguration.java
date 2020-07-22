@@ -40,11 +40,11 @@ import org.springframework.web.filter.CharacterEncodingFilter;
  * @author Brian Clozel
  * @since 2.0.0
  */
-@Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties(ServerProperties.class)
-@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
+@Configuration(proxyBeanMethods = false)	// 标注为一个配置类
+@EnableConfigurationProperties(ServerProperties.class)	// 开启配置类，和yml里面熟悉一一对应
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)	// 条件注解，判断当前是是一个web应用
 @ConditionalOnClass(CharacterEncodingFilter.class)
-@ConditionalOnProperty(prefix = "server.servlet.encoding", value = "enabled", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "server.servlet.encoding", value = "enabled", matchIfMissing = true)	// 条件注解，判断是否有配置，即使没得也继续加载
 public class HttpEncodingAutoConfiguration {
 
 	private final Encoding properties;
